@@ -19,6 +19,7 @@
       --muted: rgba(255,255,255,0.7);
       --accent1: #c071ff;
       --accent2: #7a4bff;
+      --nav-bg: rgba(10, 10, 11, 0.95);
       font-family: "Nunito", sans-serif;
     }
 
@@ -29,15 +30,104 @@
       overflow-x: hidden;
     }
 
-    /* HEADER WITH SUBTLE ANIMATION */
+    /* NAVIGATION BAR */
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      z-index: 1000;
+      padding: 0 20px;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent1);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-logo svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-link {
+      padding: 8px 16px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .nav-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+      background: rgba(192, 113, 255, 0.1);
+    }
+
+    .nav-link.active {
+      color: var(--accent1);
+      background: rgba(192, 113, 255, 0.15);
+    }
+
+    /* Mobile menu toggle */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .nav-toggle svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* HEADER WITH SUBTLE ANIMATION - ADJUSTED FOR NAV BAR */
     #header {
       position: relative;
-      height: 300px;
+      height: 360px; /* Increased height to accommodate nav bar */
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding-top: 20px;
+      padding-top: 80px; /* Increased padding to push content down */
+      margin-top: 0; /* Removed negative margin */
     }
 
     #vanta-bg {
@@ -49,6 +139,7 @@
     #header-content {
       z-index: 5;
       position: relative;
+      margin-top: 30px; /* Added margin to push content further down */
     }
 
     .profile-img {
@@ -118,6 +209,7 @@
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255,255,255,0.06);
       box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      scroll-margin-top: 80px; /* For anchor links */
     }
 
     .section-title {
@@ -143,6 +235,40 @@
       line-height: 1.6;
       font-size: 15px;
       margin: 8px 0;
+    }
+
+    /* Project Images */
+    .project-image {
+      width: 200px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin: 10px 0 15px 0;
+      border: 1px solid rgba(255,255,255,0.1);
+      display: block;
+    }
+
+    .education-image {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-right: 15px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .education-item {
+      margin-bottom: 16px;
+      padding: 14px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent1);
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .education-content {
+      flex: 1;
     }
 
     .skills {
@@ -190,14 +316,6 @@
       font-size: 13px;
       opacity: 0.6;
       margin-bottom: 8px;
-    }
-
-    .education-item {
-      margin-bottom: 16px;
-      padding: 14px;
-      background: rgba(255,255,255,0.03);
-      border-radius: 8px;
-      border-left: 3px solid var(--accent1);
     }
 
     .education-title {
@@ -285,16 +403,133 @@
       margin-bottom: 6px;
     }
 
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .nav-links {
+        gap: 3px;
+      }
+      
+      .nav-link {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+      
+      .nav-links {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        flex-direction: column;
+        padding: 20px;
+        gap: 10px;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      .nav-link {
+        padding: 12px 16px;
+        border-radius: 8px;
+        justify-content: center;
+      }
+
+      #header {
+        height: 320px;
+        padding-top: 60px;
+      }
+
+      #header-content {
+        margin-top: 20px;
+      }
+    }
+
     @media (max-width: 600px) {
       h1 { font-size: 26px; }
       .container { padding: 0 16px; }
       .contact-icons { flex-wrap: wrap; }
+      .project-image { 
+        width: 100%;
+        height: 150px;
+      }
+      .education-item {
+        flex-direction: column;
+      }
+      .education-image {
+        margin-right: 0;
+        margin-bottom: 10px;
+        align-self: center;
+      }
+      #header {
+        height: 300px;
+        padding-top: 50px;
+      }
+      #header-content {
+        margin-top: 15px;
+      }
+      .profile-img {
+        width: 120px;
+        height: 120px;
+      }
     }
 
   </style>
 </head>
 
 <body>
+
+<!-- NAVIGATION BAR -->
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="#header" class="nav-logo">
+      <i data-lucide="sparkles"></i>
+      Hadil Dahech
+    </a>
+    
+    <button class="nav-toggle" id="navToggle">
+      <i data-lucide="menu"></i>
+    </button>
+    
+    <div class="nav-links" id="navLinks">
+      <a href="#about" class="nav-link active">
+        <i data-lucide="user"></i>
+        About
+      </a>
+      <a href="#contact" class="nav-link">
+        <i data-lucide="contact"></i>
+        Contact
+      </a>
+      <a href="#education" class="nav-link">
+        <i data-lucide="graduation-cap"></i>
+        Education
+      </a>
+      <a href="#projects" class="nav-link">
+        <i data-lucide="folder"></i>
+        Projects
+      </a>
+      <a href="#skills" class="nav-link">
+        <i data-lucide="code-2"></i>
+        Skills
+      </a>
+
+    </div>
+  </div>
+</nav>
 
 <!-- HEADER -->
 <header id="header">
@@ -305,14 +540,14 @@
          alt="Hadil Dahech" class="profile-img">
 
     <h1>Hadil Dahech</h1>
-    <h2>License in ICT — IoT & Networks | ISIMM Monastir</h2>
+    <h2>Third-year student in Information and Communication Technologies (ICT) at ISIMM</h2>
   </div>
 </header>
 
 <!-- CONTENT -->
 <div class="container">
 
-  <div class="card">
+  <div class="card" id="about">
     <div class="section-title">
       <i data-lucide="user"></i>
       About Me
@@ -324,14 +559,14 @@
       embedded electronics with Arduino and ESP32, and web development.
     </p>
     <div style="margin-top: 16px; text-align: center;">
-      <a class="btn" href="https://drive.google.com/file/d/1zap5XCCw960OMbB35D3LWQ3wSXSq2DZu/view?usp=sharing" target="_blank">
+      <a href="Hadil_Dahech_CV.pdf" download class="btn">
         <i data-lucide="download"></i>
         Download My CV
       </a>
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" id="contact">
     <div class="section-title">
       <i data-lucide="contact"></i>
       Contact
@@ -354,31 +589,39 @@
     </p>
   </div>
 
-  <div class="card">
+  <div class="card" id="education">
     <div class="section-title">
       <i data-lucide="graduation-cap"></i>
       Education
     </div>
     
     <div class="education-item">
-      <div class="education-title">License in Communication Technologies (LTC)</div>
-      <div class="education-school">Higher Institute of Informatics and Mathematics, Monastir (ISIMM) — Monastir University</div>
-      <div class="education-date">2021 - Present</div>
-      <p style="margin-top: 8px;">
-        Developing skills in digital communications, networking,
-        programming, IoT, and embedded systems through hands-on projects.
-      </p>
+      <img src="https://media.licdn.com/dms/image/v2/C4E0BAQH-_v2vmj4gCg/company-logo_200_200/company-logo_200_200/0/1630643834852/isimm_logo?e=2147483647&v=beta&t=sTb-XJDoVVJ69_Vp9flhQL419Tf5b-90cr1-7qDVicM" 
+           alt="ISIMM Logo" class="education-image">
+      <div class="education-content">
+        <div class="education-title">License in Communication Technologies (LTC)</div>
+        <div class="education-school">Higher Institute of Informatics and Mathematics, Monastir (ISIMM) — Monastir University</div>
+        <div class="education-date">2021 - Present</div>
+        <p style="margin-top: 8px;">
+          Developing skills in digital communications, networking,
+          programming, IoT, and embedded systems through hands-on projects.
+        </p>
+      </div>
     </div>
 
     <div class="education-item">
-      <div class="education-title">Baccalaureate in Experimental Sciences</div>
-      <div class="education-school">18 January Secondary Institute, Jbeniana</div>
-      <div class="education-date">2020 - 2021</div>
-      <p style="margin-top: 8px;">Graduated with Honor</p>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFwpwyoGXeTlVOQPINo-_yndJyWYewpAN7pA&s" 
+           alt="Lycée 18 Janvier Logo" class="education-image">
+      <div class="education-content">
+        <div class="education-title">Baccalaureate in Experimental Sciences</div>
+        <div class="education-school">18 January Secondary Institute, Jbeniana</div>
+        <div class="education-date">2020 - 2021</div>
+        <p style="margin-top: 8px;">Graduated with Honor</p>
+      </div>
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" id="projects">
     <div class="section-title">
       <i data-lucide="folder"></i>
       Projects & Experiences
@@ -387,6 +630,8 @@
     <div class="project-item">
       <div class="project-title">Smart Daily Wellness Assistant (IoT & Intelligent Well-Being)</div>
       <div class="project-date">PFA Project — 2025</div>
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczOtQUbZW44Sb8hLmSYi-u1ulH5hd-iG0LRYaO9Br30rnzCc48vpiyDrAQp44icOBIaFdR6oANGrfHTHfI8bqFzjQlzLbyGmi859yE767gsPPH4GkYV00iPTzvA2vfxWChIWtctt2I8-wxlTib53lPSpIA=w525-h265-s-no-gm?authuser=0" 
+           alt="Smart Daily Wellness Assistant" class="project-image">
       <p>
         Developed an IoT-based smart assistant to promote daily wellness by
         monitoring temperature, humidity, light, and weight. Implemented
@@ -398,20 +643,23 @@
     </div>
 
     <div class="project-item">
-      <div class="project-title">E-Commerce Website (Online Store Project)</div>
+      <div class="project-title">United for Palestine – Awareness Website</div>
       <div class="project-date">2025</div>
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczNvnxY21MZ2mS8sAY_18m3YWOhuQd3eB9hZVjKDg0xOuP1DtJyfAsIXe3OI-gCeWSSKaumNYxyxiKGDLHtxi90r1rImTVWqQM1mA_jWSZzvQ1lO-DP7xUZ8i8O1s6O0BvtEI80d-b1EsEe0fqfCLkr4Bw=w525-h279-s-no-gm?authuser=0" 
+           alt="United for Palestine Website" class="project-image">
       <p>
-        Developed a responsive website for online product sales using
-        HTML, CSS, and JavaScript. Designed a clean and user-friendly interface with product listings,
-        shopping cart, and checkout pages.
-        Implemented dynamic features such as product filtering, search
-        bar, and interactive design for better user experience.
+        United for Palestine is a modern, responsive website designed to raise awareness and support the Palestinian cause. 
+        It provides reliable information, links to trusted foundations, secure donation options, and a news section with verified updates.
+        Built using HTML, CSS, and JavaScript, the website features a clean, clear, and modern design, smooth navigation, and full responsiveness across devices. 
+        JavaScript enhances interactivity and dynamic content, making the platform accessible and easy to use for anyone seeking to stay informed and take action.
       </p>
     </div>
 
     <div class="project-item">
       <div class="project-title">Intelligent Home Automation System</div>
       <div class="project-date">PFA Project — September 2025</div>
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczNkIC1Tqe-9BlLW0jSPfPXfn4VJP0wE7xonGOQGkv4XGJjw-lqtgN_kjQ0q2-z8iBTal610ZR7QVcVOioi3edBlKnyLhJvmmX8JitlBpmkmipTYxffBXjJBzsPM9R_Wgfdq9_WcdhlR25iIKKJC-5Qg4Q=w525-h394-s-no-gm?authuser=0" 
+           alt="Intelligent Home Automation System" class="project-image">
       <p>
         Built a real-time IoT-based smart home system integrating Arduino
         boards, sensors (DHT11, LM35, LDR, soil humidity), and actuators.
@@ -425,6 +673,8 @@
     <div class="project-item">
       <div class="project-title">PCB Design Volunteer – CPU Club</div>
       <div class="project-date">2024-2025</div>
+      <img src="https://content.instructables.com/FF0/A93P/JNUL7WNY/FF0A93PJNUL7WNY.png?auto=webp&frame=1" 
+           alt="PCB Design" class="project-image">
       <p>
         Collaborated with club members to design and prototype printed
         circuit boards (PCBs) for student and IoT projects.
@@ -438,7 +688,7 @@
 
   </div>
 
-  <div class="card">
+  <div class="card" id="skills">
     <div class="section-title">
       <i data-lucide="code-2"></i>
       Skills
@@ -461,7 +711,7 @@
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" id="languages">
     <div class="section-title">
       <i data-lucide="languages"></i>
       Languages
@@ -496,6 +746,7 @@
   // Initialize Lucide icons
   lucide.createIcons();
 
+  // VANTA Background
   VANTA.NET({
     el: "#vanta-bg",
     mouseControls: true,
@@ -510,6 +761,101 @@
     points: 12.00,
     maxDistance: 20.00,
     spacing: 18.00
+  });
+
+  // Mobile menu toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    const icon = navToggle.querySelector('i');
+    if (navLinks.classList.contains('active')) {
+      icon.setAttribute('data-lucide', 'x');
+    } else {
+      icon.setAttribute('data-lucide', 'menu');
+    }
+    lucide.createIcons();
+  });
+
+  // Smooth scrolling for navigation links (except CV download)
+  document.querySelectorAll('.nav-link:not(.btn)').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const targetId = link.getAttribute('href');
+      if (targetId === '#header') {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      } else if (targetId.startsWith('#')) {
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 70,
+            behavior: 'smooth'
+          });
+        }
+      }
+      
+      // Close mobile menu if open
+      if (navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        const icon = navToggle.querySelector('i');
+        icon.setAttribute('data-lucide', 'menu');
+        lucide.createIcons();
+      }
+    });
+  });
+
+  // Active link highlighting
+  const sections = document.querySelectorAll('.card');
+  const navItems = document.querySelectorAll('.nav-link:not(.btn)');
+
+  function highlightNav() {
+    let scrollPosition = window.scrollY + 100;
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      const sectionId = section.getAttribute('id');
+      
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        navItems.forEach(item => {
+          item.classList.remove('active');
+          if (item.getAttribute('href') === `#${sectionId}`) {
+            item.classList.add('active');
+          }
+        });
+      }
+    });
+    
+    // Special case for header
+    if (scrollPosition < 100) {
+      navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('href') === '#header') {
+          item.classList.add('active');
+        }
+      });
+    }
+  }
+
+  window.addEventListener('scroll', highlightNav);
+  window.addEventListener('load', highlightNav);
+
+  // Close mobile menu when CV is clicked (it will automatically download)
+  document.querySelectorAll('a[href="Hadil_Dahech_CV.pdf"]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Close mobile menu if open
+      if (navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        const icon = navToggle.querySelector('i');
+        icon.setAttribute('data-lucide', 'menu');
+        lucide.createIcons();
+      }
+    });
   });
 </script>
 
